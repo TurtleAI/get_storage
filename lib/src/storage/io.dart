@@ -13,7 +13,8 @@ class StorageImpl {
   final String? path;
   final String fileName;
 
-  final ValueStorage<Map<String, dynamic>> subject = ValueStorage<Map<String, dynamic>>(<String, dynamic>{});
+  final ValueStorage<Map<String, dynamic>> subject =
+      ValueStorage<Map<String, dynamic>>(<String, dynamic>{});
 
   RandomAccessFile? _randomAccessfile;
 
@@ -86,7 +87,7 @@ class StorageImpl {
     try {
       RandomAccessFile _file = await _getRandomFile();
       _file = await _file.setPosition(0);
-      final buffer = new Uint8List(await _file.length());
+      final buffer = Uint8List(await _file.length());
       await _file.readInto(buffer);
       subject.value = json.decode(utf8.decode(buffer));
     } catch (e) {
@@ -144,6 +145,8 @@ class StorageImpl {
   Future<String> _getPath(bool isBackup, String? path) async {
     final _isWindows = GetPlatform.isWindows;
     final _separator = _isWindows ? '\\' : '/';
-    return isBackup ? '$path$_separator$fileName.bak' : '$path$_separator$fileName.gs';
+    return isBackup
+        ? '$path$_separator$fileName.bak'
+        : '$path$_separator$fileName.gs';
   }
 }

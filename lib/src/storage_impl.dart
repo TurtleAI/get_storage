@@ -103,8 +103,6 @@ class GetStorage {
   /// Write data on your container
   Future<void> write(String key, dynamic value) async {
     writeInMemory(key, value);
-    // final _encoded = json.encode(value);
-    // await _concrete.write(key, json.decode(_encoded));
 
     return _tryFlush();
   }

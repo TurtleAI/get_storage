@@ -59,7 +59,7 @@ void main() async {
   });
 
   test('Write and read', () {
-    var list = new List<int>.generate(50, (i) {
+    var list = List<int>.generate(50, (i) {
       int count = i + 1;
       g.write('write', count);
       return count;
@@ -81,7 +81,7 @@ void main() async {
 
   test('Write and read using delegate', () {
     final data = 0.val('write');
-    var list = new List<int>.generate(50, (i) {
+    var list = List<int>.generate(50, (i) {
       int count = i + 1;
       data.val = count;
       return count;
@@ -93,7 +93,7 @@ void main() async {
   test('Write, read, remove and exists', () {
     expect(null, g.read('write'));
 
-    var list = new List<int>.generate(50, (i) {
+    var list = List<int>.generate(50, (i) {
       int count = i + 1;
       g.write('write', count);
       return count;
