@@ -35,9 +35,13 @@ class GetStorage {
   final microtask = Microtask();
 
   /// Start the storage drive. It's important to use await before calling this API, or side effects will occur.
-  static Future<bool> init([String container = 'GetStorage']) {
+  static Future<bool> init([
+    String container = 'GetStorage',
+    String? path,
+    Map<String, dynamic>? initialData,
+  ]) {
     WidgetsFlutterBinding.ensureInitialized();
-    return GetStorage(container).initStorage;
+    return GetStorage(container, path, initialData).initStorage;
   }
 
   Future<void> _init() async {

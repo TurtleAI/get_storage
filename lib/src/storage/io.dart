@@ -13,8 +13,7 @@ class StorageImpl {
   final String? path;
   final String fileName;
 
-  final ValueStorage<Map<String, dynamic>> subject =
-      ValueStorage<Map<String, dynamic>>(<String, dynamic>{});
+  final ValueStorage<Map<String, dynamic>> subject = ValueStorage<Map<String, dynamic>>(<String, dynamic>{});
 
   RandomAccessFile? _randomAccessfile;
 
@@ -128,8 +127,8 @@ class StorageImpl {
   }
 
   Future<File> _fileDb(bool isBackup) async {
-    final dir = await _getImplicitDir();
-    final _path = await _getPath(isBackup, path ?? dir.path);
+    final path = this.path ?? (await _getImplicitDir()).path;
+    final _path = await _getPath(isBackup, path);
     final _file = File(_path);
     return _file;
   }
@@ -145,8 +144,6 @@ class StorageImpl {
   Future<String> _getPath(bool isBackup, String? path) async {
     final _isWindows = GetPlatform.isWindows;
     final _separator = _isWindows ? '\\' : '/';
-    return isBackup
-        ? '$path$_separator$fileName.bak'
-        : '$path$_separator$fileName.gs';
+    return isBackup ? '$path$_separator$fileName.bak' : '$path$_separator$fileName.gs';
   }
 }
